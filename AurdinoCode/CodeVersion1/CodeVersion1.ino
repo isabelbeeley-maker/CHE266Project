@@ -17,7 +17,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 
 //Initialize GPS object
-SoftwareSerial gpsSerial(8, 9); // RX, TX
+SoftwareSerial gpsSerial(9, 8); // RX, TX
 TinyGPSPlus gps;
 
 unsigned long lastPrint = 0;
@@ -161,7 +161,11 @@ float getGPSDistanceFromOrigin() {
       origin_lat,
       origin_lng
     );
-
+    Serial.print("coordinates = (");
+    Serial.print(lat);
+    Serial.print(", ");
+    Serial.print(lng);
+    Serial.println(")");
     return distance_m;
   }
 
@@ -198,7 +202,7 @@ float gettDepth() {
   unsigned long CurrentTime = micros();
   unsigned long HighLevelTime = CurrentTime - StartTime;
 
-  float distance = HighLevelTime * 340.0 / 20000.0;  // cm
+  float distance = HighLevelTime * 1500.0 / 20000.0;  // cm
 
   return distance;
 }
